@@ -19,7 +19,7 @@ def get_db():
 def generate_resume(employee_id: str, db: Session = Depends(get_db)):
 
     employee = db.query(Employee).filter(
-        Employee.employee_id == employee_id
+        Employee.id == employee_id
     ).first()
 
     if not employee:
