@@ -93,5 +93,9 @@ def create_resume(employee, skills, projects, personal_info, education):
             y -= 14
         y -= 16
 
+    pdf.setFont("Helvetica-Bold", 10)
+    pdf.drawString(x +5, y, "I declare that the above information is true to the best of my knowledge.")
+    y -= 30 
+
     pdf.save()
     return file_name
