@@ -1,9 +1,12 @@
 body {
     font-family: "Segoe UI", sans-serif;
     background: linear-gradient(135deg, #2563eb, #1e40af);
-    height: 100vh;
+    min-height: 100vh;
+    padding: 20px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
     align-items: center;
 }
 
@@ -13,7 +16,7 @@ body {
     width: 420px;
     border-radius: 12px;
     text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     animation: fadeIn 0.6s ease-in-out;
 }
 
@@ -87,10 +90,102 @@ button:active {
 }
 
 @keyframes spin {
-    100% { transform: rotate(360deg); }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.tab-btn {
+    background: none;
+    color: #666;
+    border-radius: 0;
+    padding-bottom: 10px;
+    width: auto;
+}
+
+.tab-btn.active {
+    color: #2563eb;
+    border-bottom: 2px solid #2563eb;
+    background: none;
+}
+
+.tab-btn:hover {
+    background: none;
+    color: #2563eb;
+}
+
+/* Form Elements */
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    /* Ensure padding doesn't affect width */
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+input {
+    box-sizing: border-box;
+}
+
+h3 {
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.project-entry {
+    background: #f9fafb;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #eee;
+}
+
+.secondary-btn {
+    background: #e5e7eb;
+    color: #374151;
+    margin-bottom: 15px;
+}
+
+.secondary-btn:hover {
+    background: #d1d5db;
+}
+
+/* Adjust card for larger content */
+.card {
+    max-width: 500px;
+    width: 100%;
 }
