@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Builder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="card">
+    <h1>📄 Resume Builder</h1>
+    <p class="subtitle">Generate employee resumes instantly</p>
+
+    <input
+        type="text"
+        id="employeeName"
+        placeholder="Enter employee name"
+        onkeypress="handleEnter(event)"
+    />
+
+    <button onclick="generateResume()" id="generateBtn">
+        Generate Resume
+    </button>
+
+    <div class="loader" id="loader"></div>
+
+    <p id="status"></p>
+</div>
+
+<script>
+    function handleEnter(event) {
+        if (event.key === "Enter") {
+            generateResume();
+        }
+    }
+
+    function generateResume() {
+        const nameInput = document.getElementById("employeeName");
+        const status = document.getElementById("status");
+        const loader = document.getElementById("loader");
+        const button = document.getElementById("generateBtn");
+
+        const name = nameInput.value.trim();
+
+        if (!name) {
+            status.innerText = "Please enter employee name";
+            status.className = "error";
+            return;
+        }
+
+        status.innerText = "";
+        loader.style.display = "block";
+        button.disabled = true;
+
+        const url = `http://127.0.0.1:4000/resume/${encodeURIComponent(name)}`;
+
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Employee not found");
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                const fileURL = window.URL.createObjectURL(blob);
+                window.open(fileURL);
+                status.innerText = "Resume generated successfully!";
+                status.className = "success";
+            })
+            .catch(err => {
+                status.innerText = err.message;
+                status.className = "error";
+            })
+            .finally(() => {
+                loader.style.display = "none";
+                button.disabled = false;
+            });
+    }
+</script>
+</body>
+</html>
