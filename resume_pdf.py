@@ -2,7 +2,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from textwrap import wrap
 
-def create_resume(employee, skills, projects):
+def create_resume(employee, skills, projects, personal_info, education):
     file_name = "resume.pdf"
     pdf = canvas.Canvas(file_name, pagesize=A4)
 
@@ -32,11 +32,11 @@ def create_resume(employee, skills, projects):
     y -= 20
 
     pdf.setFont("Helvetica", 10)
-    pdf.drawString(x + 5, y, f"D.O.B: ")
+    pdf.drawString(x + 5, y, f"D.O.B: {personal_info.dob}")
     y -= 15
-    pdf.drawString(x + 5, y, "Address: ")
+    pdf.drawString(x + 5, y, f"Address: {personal_info.address}")
     y -= 15
-    pdf.drawString(x + 5, y, "Gender: ")
+    pdf.drawString(x + 5, y, f"Gender: {personal_info.gender}")
     y -= 30
 
     pdf.setFont("Helvetica-Bold", 12)
@@ -51,6 +51,18 @@ def create_resume(employee, skills, projects):
         pdf.drawString(x + 5, y, line)
         y -= 14
     y -= 16
+
+    pdf.setFont("Helvetica-Bold", 12)
+    pdf.drawString(x, y, "Education")
+    y -= 20
+
+    pdf.setFont("Helvetica", 10)
+    pdf.drawString(x + 5, y, f"Degree: {education.degree}")
+    y -= 15
+    pdf.drawString(x + 5, y, f"Institution: {education.institution}")
+    y -= 15
+    pdf.drawString(x + 5, y, f"Year Of Passing: {education.year_of_passing}")
+    y -= 30
 
     pdf.setFont("Helvetica-Bold", 12)
     pdf.drawString(x, y, "Technical Skills")

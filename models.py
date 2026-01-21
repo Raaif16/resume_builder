@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text
+from sqlalchemy import Column, Date, ForeignKey, Integer, String, Text
 from db import Base
 
 class Employee(Base):
@@ -10,6 +10,23 @@ class Employee(Base):
     phone = Column(String)
     summary = Column(Text)
 
+class Personal(Base):
+    __tablename__ = "personal_info"
+
+    id = Column(Integer, primary_key=True)
+    employee_id = Column(Integer)
+    dob = Column(Date)
+    gender = Column(String)
+    address = Column(String)
+
+class Education(Base):
+    __tablename__ = "education"
+
+    id = Column(Integer, primary_key=True)
+    employee_id = Column(Integer)
+    degree = Column(String)
+    institution = Column(String)
+    year_of_passing = Column(Integer)
 
 class Skill(Base):
     __tablename__ = "skills"

@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 from db import SessionLocal
-from models import Employee, Skill, Project
+from models import Employee, Skill, Project, Personal, Education
 from resume_pdf import create_resume
 from fastapi.staticfiles import StaticFiles
 
@@ -33,7 +33,15 @@ def generate_resume(employee_name: str, db: Session = Depends(get_db)):
         Project.employee_id == employee.id
     ).all()
 
-    pdf_path = create_resume(employee, skills, projects)
+    personal_info = db.query(Personal).filter(
+        Personal.employee_id == employee.id
+    ).first()
+
+    education = db.query(Education).filter(
+        Education.employee_id == employee.id
+    ).first()
+
+    pdf_path = create_resume(employee, skills, projects, personal_info, education)
 
     return FileResponse(pdf_path, filename="resume.pdf")
 
