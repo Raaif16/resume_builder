@@ -1,11 +1,15 @@
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
-from db import SessionLocal
+
 from schemas import EmployeeCreate
 from models import Employee, Skill, Project, Personal, Education
 from resume_pdf import create_resume
 from fastapi.staticfiles import StaticFiles
+
+from db import SessionLocal, engine, Base
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 

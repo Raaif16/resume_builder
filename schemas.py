@@ -2,20 +2,20 @@ from pydantic import BaseModel
 from typing import List, Optional
 from datetime import date
 
-class ProjectBase(BaseModel):
+class Project(BaseModel):
     project_name: str
     role: str
     description: str
 
-class SkillBase(BaseModel):
+class Skill(BaseModel):
     skill: str
 
-class EducationBase(BaseModel):
+class Education(BaseModel):
     degree: str
     institution: str
     year_of_passing: int
 
-class PersonalBase(BaseModel):
+class Personal(BaseModel):
     dob: date
     gender: str
     address: str
@@ -25,7 +25,7 @@ class EmployeeCreate(BaseModel):
     email: str
     phone: str
     summary: str
-    personal: PersonalBase
-    education: EducationBase
-    skills: List[SkillBase]
-    projects: List[ProjectBase]
+    personal: Personal
+    education: Education
+    skills: List[Skill]
+    projects: List[Project]
