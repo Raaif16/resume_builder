@@ -31,8 +31,6 @@ def create_employee(employee_data: EmployeeCreate, db: Session = Depends(get_db)
     )
     db.add(new_employee)
     db.commit()
-    db.refresh(new_employee)
-
     
     new_personal = Personal(
         employee_id=new_employee.id,
